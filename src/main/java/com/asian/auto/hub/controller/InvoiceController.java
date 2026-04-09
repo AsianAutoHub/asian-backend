@@ -25,7 +25,7 @@ public class InvoiceController {
     private final InvoiceServiceImpl invoiceService;
     private final InvoicePdfServiceImpl invoicePdfService;
 
-    // GET /api/invoice/{carPurchaseId}/data  → JSON preview
+    
     @GetMapping("/{carPurchaseId}/data")
     public ResponseEntity<ApiResponse<InvoiceResponseDto>> getInvoiceData(
             @PathVariable Long carPurchaseId) {
@@ -33,7 +33,7 @@ public class InvoiceController {
                 ApiResponse.success(invoiceService.buildInvoiceData(carPurchaseId)));
     }
 
-    // GET /api/invoice/{carPurchaseId}/pdf  → download PDF
+    
     @GetMapping("/{carPurchaseId}/pdf")
     public ResponseEntity<ByteArrayResource> downloadInvoicePdf(
             @PathVariable Long carPurchaseId) throws Exception {

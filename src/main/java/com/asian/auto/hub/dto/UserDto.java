@@ -18,7 +18,8 @@ public class UserDto {
 	private String password;
 	private String email;
 	private String phone;
-	private boolean deleted;
+	private Boolean deleted;
 	private List<Long> roleIds;
+	private Double amountInvested;
 
 }

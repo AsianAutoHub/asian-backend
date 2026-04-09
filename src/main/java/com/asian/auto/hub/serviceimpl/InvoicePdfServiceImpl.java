@@ -267,7 +267,7 @@ public class InvoicePdfServiceImpl {
 		return sb.toString();
 	}
 
-	// ── Helpers ──
+	
 	private String infoCell(String label, String value) {
 		return "<td class=\"lbl\">" + label + "</td>" + "<td class=\"val\">" + (value != null ? value : "N/A") + "</td>";
 	}

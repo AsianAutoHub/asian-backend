@@ -2,8 +2,6 @@ package com.asian.auto.hub.serviceimpl;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
-import java.util.List;
-import java.util.function.Function;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -11,14 +9,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import com.asian.auto.hub.dto.CarPurchaseResponseDto;
 import com.asian.auto.hub.dto.UserDto;
 import com.asian.auto.hub.dto.UserRolesDto;
 import com.asian.auto.hub.exception.InvalidDataException;
 import com.asian.auto.hub.exception.ResourceConflictException;
 import com.asian.auto.hub.exception.ResourceNotFoundException;
 import com.asian.auto.hub.mapper.UserMapper;
-import com.asian.auto.hub.model.CarPurchase;
 import com.asian.auto.hub.model.User;
 import com.asian.auto.hub.repository.RoleRepository;
 import com.asian.auto.hub.repository.UserRepository;
@@ -109,6 +105,7 @@ public class UserServiceImpl implements UserService {
 		userMapper.updateUserFromDto(user, userDetails);
 
 		userDetails.setUpdatedOn(LocalDateTime.now());
+		userDetails.setDeleted(false);
 
 		if (user.getRoleIds() != null) {
 			userDetails.setRoles(new HashSet<>(roleRepo.findAllById(user.getRoleIds())));
