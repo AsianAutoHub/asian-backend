@@ -43,7 +43,8 @@ public class UserMetricsServiceImpl {
                 .mapToDouble(CarExpense::getAmount)
                 .sum();
 
-        double netExpense     = totalDR - totalCR;
+       // double netExpense     = totalDR - totalCR;
+        double netExpense     = totalCR - totalDR;
         double amountInvested = user.getAmountInvested() != null
                                     ? user.getAmountInvested() : 0.0;
         double balanceAmount  = amountInvested - netExpense;

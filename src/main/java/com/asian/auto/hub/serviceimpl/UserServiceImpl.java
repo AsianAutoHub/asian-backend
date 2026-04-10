@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
 			throw new InvalidDataException("Received User details as Null");
 		}
 
-		if (userRepo.existsByEmail(user.getEmail())) {
+		if (userRepo.existsByEmailAndDeletedFalse(user.getEmail())) {
 			throw new ResourceConflictException("User already exists");
 		}
 
@@ -97,7 +97,7 @@ public class UserServiceImpl implements UserService {
 				.orElseThrow(() -> new ResourceNotFoundException("User Not Found With Given Id: " + id));
 
 		if (user.getEmail() != null && !userDetails.getEmail().equals(user.getEmail())
-				&& userRepo.existsByEmail(user.getEmail())) {
+				&& userRepo.existsByEmailAndDeletedFalse(user.getEmail())) {
 
 			throw new ResourceConflictException("Email already exists");
 		}

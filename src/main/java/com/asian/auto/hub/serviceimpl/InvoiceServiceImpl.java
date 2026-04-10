@@ -85,7 +85,7 @@ public class InvoiceServiceImpl {
 
 		double saledAmount = car.getSaledAmount() != null ? car.getSaledAmount() : 0.0;
 		double purchaseAmount = car.getPurchaseAmount() != null ? car.getPurchaseAmount() : 0.0;
-//		invoice.setNetProfit(saledAmount - purchaseAmount - totalExpense);
+	//invoice.setNetProfit(saledAmount - (purchaseAmount + totalExpense));
 		invoice.setNetProfit(saledAmount - totalExpense);
 
 
