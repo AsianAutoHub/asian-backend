@@ -52,17 +52,15 @@ public class RoleController {
     @PutMapping("/{id}")
     public ResponseEntity<ApiResponse<Role>> update(
             @PathVariable Long id,
-            @RequestBody RoleDto dto,
-            @RequestHeader("X-Updated-By") String updatedBy) {
+            @RequestBody RoleDto dto) {
         return ResponseEntity.ok(ApiResponse.success("Role updated successfully",
-                roleService.updateRole(id, dto, updatedBy)));
+                roleService.updateRole(id, dto)));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<ApiResponse<Void>> delete(
-            @PathVariable Long id,
-            @RequestHeader("X-Updated-By") String deletedBy) {
-        roleService.deleteRole(id, deletedBy);
+            @PathVariable Long id) {
+        roleService.deleteRole(id);
         return ResponseEntity.ok(ApiResponse.deleted("Role deleted successfully"));
     }
 }

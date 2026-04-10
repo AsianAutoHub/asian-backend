@@ -46,18 +46,18 @@ public class RoleServiceImpl {
                 .orElseThrow(() -> new ResourceNotFoundException("Role not found with id: " + id));
     }
 
-    public Role updateRole(Long id, RoleDto dto, String updatedBy) {
+    public Role updateRole(Long id, RoleDto dto) {
         Role existing = getRoleById(id);
         existing.setRole(dto.getName());
-        existing.setUpdatedBy(updatedBy);
+        existing.setUpdatedBy("system");
         existing.setUpdatedOn(LocalDateTime.now());
         return roleRepository.save(existing);
     }
 
-    public void deleteRole(Long id, String deletedBy) {
+    public void deleteRole(Long id) {
         Role existing = getRoleById(id);
         existing.setDeleted(true);
-        existing.setUpdatedBy(deletedBy);
+        existing.setUpdatedBy("system");
         existing.setUpdatedOn(LocalDateTime.now());
         roleRepository.save(existing);
     }

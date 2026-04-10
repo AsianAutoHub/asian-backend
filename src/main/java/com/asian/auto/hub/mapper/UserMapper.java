@@ -26,9 +26,11 @@ public interface UserMapper {
 	//List<UserRolesDto> toDtoList(List<User> users);
 
 	@Mapping(target = "roles", ignore = true)
+	@Mapping(target = "deleted", ignore = true)
 	User toEntity(UserDto dto);
 
 	@Mapping(target = "roles", ignore = true)
+	@Mapping(target = "deleted", ignore = true)
 	void updateUserFromDto(UserDto dto, @MappingTarget User entity);
 	
 	UserRolesDto toResponseDTO(User user);
