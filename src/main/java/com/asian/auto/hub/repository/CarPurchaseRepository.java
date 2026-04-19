@@ -1,5 +1,6 @@
 package com.asian.auto.hub.repository;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -43,4 +44,17 @@ public interface CarPurchaseRepository extends JpaRepository<CarPurchase, Long> 
       @Param("id") Long id,
       @Param("type") PaymentType type
   );
+  
+  
+//✅ add to existing CarPurchaseRepository
+@Query("""
+   SELECT c FROM CarPurchase c
+   WHERE c.deleted = false
+   AND c.purchaseDate BETWEEN :fromDate AND :toDate
+   ORDER BY c.purchaseDate ASC
+""")
+List<CarPurchase> findByDateRange(
+   @Param("fromDate") LocalDate fromDate,
+   @Param("toDate")   LocalDate toDate
+);
 }
