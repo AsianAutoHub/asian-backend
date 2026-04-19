@@ -23,6 +23,7 @@ public class UserRolesDto {
 	private String email;
 	private String phone;
 	private boolean deleted;
+	private Double amountInvested;
 	private List<RoleDto> roles;
 
 }
