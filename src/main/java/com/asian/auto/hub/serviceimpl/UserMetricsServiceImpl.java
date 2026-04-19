@@ -47,7 +47,8 @@ public class UserMetricsServiceImpl {
         double netExpense     = totalCR - totalDR;
         double amountInvested = user.getAmountInvested() != null
                                     ? user.getAmountInvested() : 0.0;
-        double balanceAmount  = amountInvested - netExpense;
+      //  double balanceAmount  = amountInvested - netExpense;
+        double balanceAmount  = (amountInvested - totalDR) + totalCR;
 
 //        // ── Build expense breakdown ──
 //        List<ExpenseBreakdown> breakdown = expenses.stream()
