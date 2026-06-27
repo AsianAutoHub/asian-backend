@@ -42,12 +42,12 @@ public class MonthlyStatementServiceImpl {
                     .filter(e -> e.getCarPurchase() != null
                               && e.getCarPurchase().getId().equals(p.getId()))
                     .mapToDouble(e -> "DR".equals(e.getPaymentType().name())
-                            ? e.getAmount() : -e.getAmount())
+                            ? e.getAmount() : 0.0)
                     .sum();
 
             double saleAmt     = p.getSaledAmount()    != null ? p.getSaledAmount()    : 0.0;
             double purchaseAmt = p.getPurchaseAmount()  != null ? p.getPurchaseAmount() : 0.0;
-            double netProfit   = saleAmt - purchaseAmt - carExpenses;
+            double netProfit   = saleAmt - carExpenses;
 
             return new CarPurchaseStatDto(
                     p.getNumberPlate(),
@@ -76,9 +76,9 @@ public class MonthlyStatementServiceImpl {
                 .sum();
         double totalExpensesInRange = expenses.stream()
                 .mapToDouble(e -> "DR".equals(e.getPaymentType().name())
-                        ? e.getAmount() : -e.getAmount())
+                        ? e.getAmount() : 0.0)
                 .sum();
-        double totalProfit = totalSaleAmt - totalPurchaseAmt - totalExpensesInRange;
+        double totalProfit = totalSaleAmt - totalExpensesInRange;
 
         // ── DR / CR totals ──
         double totalDR = expenses.stream()
@@ -99,9 +99,9 @@ public class MonthlyStatementServiceImpl {
             double cr = userExpenses.stream()
                     .filter(e -> "CR".equals(e.getPaymentType().name()))
                     .mapToDouble(CarExpense::getAmount).sum();
-            double net      = dr - cr;
+            double net      = cr - dr;
             double invested = u.getAmountInvested() != null ? u.getAmountInvested() : 0.0;
-            double balance  = invested - net;
+            double balance  = (invested - dr)+cr;
 
             return new UserMetricRangeDto(
                     u.getFirstname() + " " + u.getLastname(),
