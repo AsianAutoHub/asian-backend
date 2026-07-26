@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.asian.auto.hub.dto.UserDto;
@@ -29,6 +30,8 @@ public class UserServiceImpl implements UserService {
 	private final UserRepository userRepo;
 	private final UserMapper userMapper;
 	private final RoleRepository roleRepo;
+	 private  final PasswordEncoder passwordEncoder;
+
 
 	@Override
 	public UserRolesDto createUser(UserDto user) {
@@ -106,6 +109,7 @@ public class UserServiceImpl implements UserService {
 
 		userDetails.setUpdatedOn(LocalDateTime.now());
 		userDetails.setDeleted(false);
+		userDetails.setPassword(passwordEncoder.encode(userDetails.getPassword()));
 
 		if (user.getRoleIds() != null) {
 			userDetails.setRoles(new HashSet<>(roleRepo.findAllById(user.getRoleIds())));
