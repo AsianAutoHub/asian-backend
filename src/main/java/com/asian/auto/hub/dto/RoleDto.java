@@ -1,21 +1,13 @@
 package com.asian.auto.hub.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Setter
 @Getter
-@ToString
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class RoleDto {
-
 	private Long id;
 	private String name;
-
 }

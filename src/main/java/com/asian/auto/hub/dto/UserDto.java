@@ -1,16 +1,14 @@
 package com.asian.auto.hub.dto;
 
+import lombok.*;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
 
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
-@ToString
+@NoArgsConstructor
+@Builder
 public class UserDto {
 
 	private String firstname;
@@ -21,5 +19,4 @@ public class UserDto {
 	private Boolean deleted;
 	private List<Long> roleIds;
 	private Double amountInvested;
-
 }
